@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumine — Global Alliance</title>
+<style>
+  :root{
+    --bg:#0f1720;
+    --bg2:#16202b;
+    --accent:#f5c451;
+    --accent2:#7fd3c7;
+    --text:#f4f6f8;
+    --muted:#a9b4bf;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:'Segoe UI', system-ui, -apple-system, sans-serif;
+    background:linear-gradient(180deg,var(--bg) 0%, var(--bg2) 100%);
+    color:var(--text);
+    line-height:1.6;
+    min-height:100vh;
+  }
+  header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:24px 6%;
+    position:sticky;
+    top:0;
+    background:rgba(15,23,32,0.85);
+    backdrop-filter:blur(6px);
+    z-index:10;
+  }
+  .logo{
+    font-size:1.4rem;
+    font-weight:700;
+    letter-spacing:0.5px;
+  }
+  .logo span{color:var(--accent);}
+  nav a{
+    color:var(--muted);
+    text-decoration:none;
+    margin-left:24px;
+    font-size:0.95rem;
+    transition:color .2s;
+  }
+  nav a:hover{color:var(--text);}
+  #langToggle{
+    background:transparent;
+    border:1px solid var(--muted);
+    color:var(--text);
+    padding:6px 14px;
+    border-radius:20px;
+    cursor:pointer;
+    font-size:0.85rem;
+    margin-left:24px;
+  }
+  #langToggle:hover{border-color:var(--accent);color:var(--accent);}
+  .hero{
+    text-align:center;
+    padding:100px 6% 80px;
+    max-width:800px;
+    margin:0 auto;
+  }
+  .hero h1{
+    font-size:clamp(2.2rem,5vw,3.4rem);
+    margin-bottom:20px;
+    font-weight:700;
+  }
+  .hero h1 span{color:var(--accent);}
+  .hero p{
+    color:var(--muted);
+    font-size:1.15rem;
+    max-width:600px;
+    margin:0 auto 32px;
+  }
+  .cta{
+    display:inline-block;
+    background:var(--accent);
+    color:#1a1a1a;
+    padding:14px 32px;
+    border-radius:30px;
+    text-decoration:none;
+    font-weight:600;
+    transition:transform .2s, box-shadow .2s;
+  }
+  .cta:hover{transform:translateY(-2px);box-shadow:0 10px 25px rgba(245,196,81,0.3);}
+  section{padding:60px 6%;max-width:1100px;margin:0 auto;}
+  .section-title{
+    font-size:1.8rem;
+    margin-bottom:12px;
+    text-align:center;
+  }
+  .section-sub{
+    text-align:center;
+    color:var(--muted);
+    max-width:600px;
+    margin:0 auto 48px;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:24px;
+  }
+  .card{
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:16px;
+    padding:32px 24px;
+    transition:transform .2s, border-color .2s;
+  }
+  .card:hover{transform:translateY(-4px);border-color:var(--accent2);}
+  .card .icon{font-size:2rem;margin-bottom:16px;}
+  .card h3{margin-bottom:10px;font-size:1.15rem;}
+  .card p{color:var(--muted);font-size:0.95rem;}
+  .programs{
+    background:rgba(255,255,255,0.03);
+    border-radius:20px;
+    padding:40px 24px;
+    text-align:center;
+  }
+  .programs ul{
+    list-style:none;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:14px;
+    margin-top:24px;
+  }
+  .programs li{
+    background:rgba(255,255,255,0.06);
+    padding:10px 20px;
+    border-radius:20px;
+    font-size:0.9rem;
+    color:var(--muted);
+  }
+  .programs li.active{
+    background:var(--accent);
+    color:#1a1a1a;
+    font-weight:600;
+  }
+  footer{
+    text-align:center;
+    padding:40px 6%;
+    color:var(--muted);
+    font-size:0.85rem;
+    border-top:1px solid rgba(255,255,255,0.08);
+    margin-top:40px;
+  }
+  footer a{color:var(--accent2);text-decoration:none;}
+  [data-lang="en"]{display:none;}
+  body.lang-en [data-lang="es"]{display:none;}
+  body.lang-en [data-lang="en"]{display:inline;}
+  body.lang-en [data-lang="en"].block{display:block;}
+  [data-lang="es"].block{display:block;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Lum<span>ine</span></div>
+  <nav>
+    <a href="#mision" data-lang="es">Misión</a>
+    <a href="#mision" data-lang="en">Mission</a>
+    <a href="#programa" data-lang="es">Qué ofrece</a>
+    <a href="#programa" data-lang="en">What we offer</a>
+    <a href="#contacto" data-lang="es">Contacto</a>
+    <a href="#contacto" data-lang="en">Contact</a>
+    <button id="langToggle">EN</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1 data-lang="es" class="block">Un espacio de <span>luz</span> dentro de DIGNARIA</h1>
+  <h1 data-lang="en" class="block">A space of <span>light</span> within DIGNARIA</h1>
+  <p data-lang="es" class="block">Lumine es un programa de la Fundación EHS Fed y Global Alliance, dedicado a acompañar, orientar y conectar a personas y comunidades a través del conocimiento, el cuidado y la voz compartida.</p>
+  <p data-lang="en" class="block">Lumine is a program of the EHS Fed Foundation and Global Alliance, dedicated to guiding, supporting and connecting people and communities through shared knowledge, care and voice.</p>
+  <a href="#contacto" class="cta" data-lang="es">Conoce más</a>
+  <a href="#contacto" class="cta" data-lang="en">Learn more</a>
+</section>
+
+<section id="mision">
+  <h2 class="section-title" data-lang="es">Nuestra misión</h2>
+  <h2 class="section-title" data-lang="en">Our mission</h2>
+  <p class="section-sub" data-lang="es">Ser un punto de luz para quienes buscan orientación, acompañamiento y comunidad — dentro del ecosistema de programas de DIGNARIA.</p>
+  <p class="section-sub" data-lang="en">To be a point of light for those seeking guidance, support and community — as part of DIGNARIA's family of programs.</p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="icon">🕊️</div>
+      <h3 data-lang="es">Acompañamiento</h3>
+      <h3 data-lang="en">Guidance</h3>
+      <p data-lang="es">Orientación cercana y humana para quienes lo necesitan.</p>
+      <p data-lang="en">Close, human guidance for those who need it.</p>
+    </div>
+    <div class="card">
+      <div class="icon">🌍</div>
+      <h3 data-lang="es">Comunidad global</h3>
+      <h3 data-lang="en">Global community</h3>
+      <p data-lang="es">Conectamos personas más allá de fronteras e idiomas.</p>
+      <p data-lang="en">We connect people beyond borders and languages.</p>
+    </div>
+    <div class="card">
+      <div class="icon">📚</div>
+      <h3 data-lang="es">Conocimiento compartido</h3>
+      <h3 data-lang="en">Shared knowledge</h3>
+      <p data-lang="es">Recursos accesibles para aprender y crecer juntos.</p>
+      <p data-lang="en">Accessible resources to learn and grow together.</p>
+    </div>
+  </div>
+</section>
+
+<section id="programa">
+  <div class="programs">
+    <h2 class="section-title" data-lang="es">Parte de la familia DIGNARIA</h2>
+    <h2 class="section-title" data-lang="en">Part of the DIGNARIA family</h2>
+    <p class="section-sub" data-lang="es" style="margin-bottom:0;">Lumine se suma a los demás programas de la Fundación:</p>
+    <p class="section-sub" data-lang="en" style="margin-bottom:0;">Lumine joins the Foundation's other programs:</p>
+    <ul>
+      <li data-lang="es">Escudo Digital</li>
+      <li data-lang="en">Digital Shield</li>
+      <li data-lang="es">Voz y accesibilidad</li>
+      <li data-lang="en">Voice &amp; accessibility</li>
+      <li data-lang="es">Salud y autocuidado</li>
+      <li data-lang="en">Health &amp; self-care</li>
+      <li data-lang="es">Conocimiento compartido</li>
+      <li data-lang="en">Shared knowledge</li>
+      <li class="active">Lumine</li>
+    </ul>
+  </div>
+</section>
+
+<section id="contacto">
+  <h2 class="section-title" data-lang="es">Hablemos</h2>
+  <h2 class="section-title" data-lang="en">Let's talk</h2>
+  <p class="section-sub" data-lang="es">¿Quieres saber más sobre Lumine o cómo participar? Escríbenos.</p>
+  <p class="section-sub" data-lang="en">Want to learn more about Lumine or how to get involved? Reach out.</p>
+  <div style="text-align:center;">
+    <a href="mailto:contacto@globalalliancesms.org" class="cta" data-lang="es">Escríbenos</a>
+    <a href="mailto:contacto@globalalliancesms.org" class="cta" data-lang="en">Contact us</a>
+  </div>
+</section>
+
+<footer>
+  <p data-lang="es">Lumine · Un programa de la Fundación EHS Fed y Global Alliance</p>
+  <p data-lang="en">Lumine · A program of the EHS Fed Foundation and Global Alliance</p>
+  <p style="margin-top:8px;">© 2026 · <a href="https://globalalliancesms.org">globalalliancesms.org</a></p>
+</footer>
+
+<script>
+  const btn = document.getElementById('langToggle');
+  const body = document.body;
+  btn.addEventListener('click', () => {
+    const isEn = body.classList.toggle('lang-en');
+    btn.textContent = isEn ? 'ES' : 'EN';
+  });
+</script>
+
+</body>
+</html>
