@@ -5,21 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lumine — Pregnancy support</title>
 
-<!--
-  ============================================================
-  GOOGLE ADS: pega aquí tu etiqueta de Google (Google tag).
-  La encuentras en Google Ads > Herramientas > Conversiones > tu conversión > "Configuración de la etiqueta".
-  Sustituye AW-XXXXXXXXXX por tu ID real. Ejemplo:
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'AW-XXXXXXXXXX');
-  </script>
-  ============================================================
--->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-1000489557"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-1000489557');
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -168,15 +161,12 @@
 
   // ============================================================
   // GOOGLE ADS: seguimiento de conversiones al hacer clic en un botón de chat.
-  // Necesitas crear UNA conversión por canal en Google Ads (o una genérica
-  // "Chat iniciado") y pegar aquí su etiqueta de evento (send_to).
-  // La encuentras en Google Ads > Conversiones > tu conversión > "Ver etiqueta".
-  // Ejemplo de send_to: 'AW-XXXXXXXXXX/AbCdEfGhIjKlMnOp'
+  // Conversión "Lumine - Chat iniciado" (cuenta 210-597-2132).
   // ============================================================
   function trackChatClick(channel) {
     if (typeof gtag === 'function') {
       gtag('event', 'conversion', {
-        'send_to': 'AW-XXXXXXXXXX/REEMPLAZA_CON_TU_ETIQUETA',
+        'send_to': 'AW-1000489557/rx59CLa5qYEdENWEid0D',
         'event_callback': function () {}
       });
       // Opcional: also send channel as a custom event for later analysis
