@@ -151,7 +151,7 @@
     <span class="lang-en">Lumine is a program of <a href="https://www.globalalliancesms.org/en/" style="color: #6B5A3E; text-decoration: underline;">Fundación Educación Salud y Sociedad</a>, part of the DIGNARIA initiative.</span>
     <span class="lang-es">Lumine es un programa de la <a href="https://www.globalalliancesms.org/" style="color: #6B5A3E; text-decoration: underline;">Fundación Educación Salud y Sociedad</a>, dentro de la iniciativa DIGNARIA.</span>
     <p style="margin: 14px 0 0; display: flex; gap: 8px 18px; flex-wrap: wrap; justify-content: center;">
-      <a href="privacy.html" style="color: #6B5A3E; text-decoration: underline;"><span class="lang-en">Privacy policy</span><span class="lang-es">Política de privacidad</span></a>
+      <a href="privacy.html" data-keep-lang="privacy.html" style="color: #6B5A3E; text-decoration: underline;"><span class="lang-en">Privacy policy</span><span class="lang-es">Política de privacidad</span></a>
       <span id="fb-link-wrap"><a id="fb-link" href="https://www.facebook.com/profile.php?id=61594210933391" target="_blank" rel="noopener" style="color: #6B5A3E; text-decoration: underline;">Facebook</a></span>
     </p>
     <p style="margin: 12px auto 0; max-width: 560px; line-height: 1.5;">
@@ -166,7 +166,7 @@
   <p>
     <span class="lang-en">We only use measurement cookies if you accept.</span>
     <span class="lang-es">Usamos cookies de medición solo si las aceptas.</span>
-    <a href="privacy.html"><span class="lang-en">Privacy policy</span><span class="lang-es">Política de privacidad</span></a>
+    <a href="privacy.html" data-keep-lang="privacy.html"><span class="lang-en">Privacy policy</span><span class="lang-es">Política de privacidad</span></a>
   </p>
   <div class="consent-actions">
     <button type="button" class="consentbtn reject" onclick="setConsent('rejected')"><span class="lang-en">Reject</span><span class="lang-es">Rechazar</span></button>
@@ -175,8 +175,22 @@
 </div>
 
 <script>
-  // Idioma inicial: inglés (idioma principal para Nigeria/Sudáfrica)
-  document.documentElement.setAttribute('data-lang', 'en');
+  // Idioma inicial: ?lang=es|en en la URL (p. ej. desde un anuncio); si no, inglés.
+  function initialLang() {
+    var m = /[?&]lang=(es|en)\b/.exec(location.search);
+    return m ? m[1] : 'en';
+  }
+
+  // Aplica el idioma y lo propaga a los enlaces internos a privacy.html / index.html.
+  function setLang(lang) {
+    document.documentElement.setAttribute('data-lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+    var links = document.querySelectorAll('a[data-keep-lang]');
+    for (var i = 0; i < links.length; i++) {
+      links[i].setAttribute('href', links[i].getAttribute('data-keep-lang') + '?lang=' + lang);
+    }
+  }
+  setLang(initialLang());
 
   // Oculta los enlaces que aún contienen un marcador sin rellenar ("[TU_...]").
   function hidePlaceholderLinks() {
@@ -209,7 +223,7 @@
 
   function toggleLang() {
     var current = document.documentElement.getAttribute('data-lang');
-    document.documentElement.setAttribute('data-lang', current === 'en' ? 'es' : 'en');
+    setLang(current === 'en' ? 'es' : 'en');
     updateInstagram();
   }
   updateInstagram();
