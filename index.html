@@ -85,7 +85,8 @@
         Messenger
       </a>
 
-      <a class="chatbtn" href="https://ig.me/m/[TU_USUARIO_INSTAGRAM]" data-channel="instagram" onclick="trackChatClick('instagram')"
+      <a class="chatbtn" href="https://ig.me/m/[TU_USUARIO_INSTAGRAM]" data-channel="instagram"
+         data-ig-en="[TU_USUARIO_INSTAGRAM_EN]" data-ig-es="[TU_USUARIO_INSTAGRAM_ES]" onclick="trackChatClick('instagram')"
          aria-label="Chat on Instagram"
          style="display: flex; align-items: center; gap: 10px; padding: 15px 24px; border-radius: 14px; background: #A5455F; color: #FFFFFF; font-weight: 600; font-size: 15px; min-height: 44px;">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none"/></svg>
@@ -192,10 +193,26 @@
   }
   hidePlaceholderLinks();
 
+  // Instagram: una cuenta por idioma (data-ig-en / data-ig-es).
+  // Si la cuenta del idioma actual sigue con marcador "[TU_", el botón se oculta.
+  function updateInstagram() {
+    var a = document.querySelector('a[data-channel="instagram"]');
+    if (!a) return;
+    var user = a.getAttribute('data-ig-' + document.documentElement.getAttribute('data-lang'));
+    if (!user || user.indexOf('[TU_') !== -1) {
+      a.style.display = 'none';
+      return;
+    }
+    a.setAttribute('href', 'https://ig.me/m/' + encodeURIComponent(user));
+    a.style.display = 'flex';
+  }
+
   function toggleLang() {
     var current = document.documentElement.getAttribute('data-lang');
     document.documentElement.setAttribute('data-lang', current === 'en' ? 'es' : 'en');
+    updateInstagram();
   }
+  updateInstagram();
 
   // ============================================================
   // CONSENTIMIENTO DE COOKIES: gtag.js solo se carga si la persona acepta.
