@@ -39,7 +39,7 @@
 <div style="width: 100%; min-height: 100vh;">
 
   <header style="display: flex; justify-content: space-between; align-items: center; max-width: 1180px; margin: 0 auto; padding: 28px 32px 0;">
-    <a href="index.html" style="font-family: 'Fraunces', serif; font-size: 26px; font-weight: 600; letter-spacing: 0.5px; color: #2D2A26; text-decoration: none;">Lumine</a>
+    <a href="index.html" data-keep-lang="index.html" style="font-family: 'Fraunces', serif; font-size: 26px; font-weight: 600; letter-spacing: 0.5px; color: #2D2A26; text-decoration: none;">Lumine</a>
     <button class="langbtn" onclick="toggleLang()" style="font-family: 'Work Sans', sans-serif; font-size: 14px; font-weight: 600; padding: 10px 18px; border-radius: 999px; border: 1.5px solid #2D2A26; background: transparent; color: #2D2A26; cursor: pointer;">
       <span class="lang-en">ES</span><span class="lang-es">EN</span>
     </button>
@@ -133,7 +133,7 @@
       <p class="note">Lumine no es un servicio médico ni de urgencias. Si tienes una urgencia, llama al 112.</p>
     </div>
 
-    <p style="margin-top: 36px;"><a href="index.html"><span class="lang-en">← Back to Lumine</span><span class="lang-es">← Volver a Lumine</span></a></p>
+    <p style="margin-top: 36px;"><a href="index.html" data-keep-lang="index.html"><span class="lang-en">← Back to Lumine</span><span class="lang-es">← Volver a Lumine</span></a></p>
   </main>
 
   <footer style="padding: 28px 32px 40px; text-align: center; font-size: 13px; color: #8A8577; border-top: 1px solid #EFE3D3;">
@@ -144,12 +144,26 @@
 </div>
 
 <script>
-  // Idioma inicial: inglés, igual que index.html
-  document.documentElement.setAttribute('data-lang', 'en');
+  // Idioma inicial: ?lang=es|en en la URL (igual que index.html); si no, inglés.
+  function initialLang() {
+    var m = /[?&]lang=(es|en)\b/.exec(location.search);
+    return m ? m[1] : 'en';
+  }
+
+  // Aplica el idioma y lo propaga a los enlaces internos a privacy.html / index.html.
+  function setLang(lang) {
+    document.documentElement.setAttribute('data-lang', lang);
+    document.documentElement.setAttribute('lang', lang);
+    var links = document.querySelectorAll('a[data-keep-lang]');
+    for (var i = 0; i < links.length; i++) {
+      links[i].setAttribute('href', links[i].getAttribute('data-keep-lang') + '?lang=' + lang);
+    }
+  }
+  setLang(initialLang());
 
   function toggleLang() {
     var current = document.documentElement.getAttribute('data-lang');
-    document.documentElement.setAttribute('data-lang', current === 'en' ? 'es' : 'en');
+    setLang(current === 'en' ? 'es' : 'en');
   }
 </script>
 
